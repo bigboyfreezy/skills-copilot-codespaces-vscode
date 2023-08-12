@@ -1,68 +1,19 @@
-// create web server
-// npm install express
-// npm install body-parser
-// npm install cors
-// npm install mongoose
-// npm install nodemon
-// npm install jsonwebtoken
-// npm install bcryptjs
-// npm install express-validator
-// npm install cookie-parser
-// npm install express-session
-// npm install connect-mongodb-session
-// npm install csurf
-// npm install connect-flash
-// npm install multer
-// npm install uuid
-// npm install nodemailer
-// npm install nodemailer-sendgrid-transport
-// npm install express-handlebars
-// npm install handlebars
-// npm install handlebars-helpers
-// npm install handlebars-layouts
-// npm install handlebars.moment
-// npm install handlebars-intl
-// npm install intl-messageformat
-// npm install intl-messageformat-parser
-// npm install intl-relativeformat
-// npm install intl-relativeformat-parser
-// npm install moment
-// npm install moment-timezone
-// npm install moment-range
-// npm install moment-duration-format
-// npm install moment-timezone-data
-// npm install moment-interval
-// npm install moment-locales-webpack-plugin
-// npm install moment-strftime-interop
-// npm install moment-precise-range-plugin
-// npm install moment-business-days
-// npm install moment-holiday
-// npm install moment-timezone-name-index
-// npm install moment-weekday-calc
-// npm install moment-weekday-calc-data
-// npm install moment-recur
-// npm install moment-timezone-olson
-// npm install moment-timezone-raw
-// npm install moment-timezone-transform
-// npm install moment-timezone-utilities
-// npm install moment-ferie-fr
-// npm install moment-holiday-ru
-// npm install moment-holiday-uk
-// npm install moment-holiday-us
-// npm install moment-holiday-ve
-// npm install moment-holiday-af
-// npm install moment-holiday-al
-// npm install moment-holiday-ar
-// npm install moment-holiday-at
-// npm install moment-holiday-au
-// npm install moment-holiday-aw
-// npm install moment-holiday-ba
-// npm install moment-holiday-be
-// npm install moment-holiday-bg
-// npm install moment-holiday-bo
-// npm install moment-holiday-br
-// npm install moment-holiday-ca
-// npm install moment-holiday-cl
-// npm install moment-holiday-co
-// npm install moment-holiday-cr
-//
+// create web server with express
+// express is a node.js module for building HTTP servers
+const express = require('express');
+const router = express.Router();
+const comments = require('../data/comments');
+
+router.get('/comments', (req, res) => {
+    res.json(comments);
+});
+
+router.get('/comments/:id', (req, res) => {
+    const found = comments.some(comment => comment.id === parseInt(req.params.id));
+    if (found) {
+        res.json(comments.filter(comment => comment.id === parseInt(req.params.id)));
+    } else {
+        res.status(400).json({msg: `No comment with the id of ${req.params.id}`});
+    }
+});
+
